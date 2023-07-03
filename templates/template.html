@@ -10,22 +10,22 @@
     <div class="um">
         <p><strong>Enter email body. Use single quotes to include a variable name.</strong>
         <br/>Attention 'person_name'. Kindly send 'project_name' data asap</p>
-        <textarea name="mail_text" id="mail_text" placeholder="Email body: Attention 'person_name'. Kindly send 'project_name' data asap"  rows="4" cols="100"></textarea>
+        <textarea name="mail_body" id="mail_body" placeholder="Email body: Attention 'person_name'. Kindly send 'project_name' data asap"  rows="4" cols="100"></textarea>
     </div>
     <div class="um">
         <p><strong>Enter email signature. Use single quotes to include a variable name. </strong>
         <br/>Leave it blank if not required</p>
-        <textarea name="mail_text" id="mail_text" placeholder="Regards, 'name'"  rows="4" cols="100"></textarea>
+        <textarea name="signature" id="signature" placeholder="Regards, 'name'"  rows="4" cols="100"></textarea>
     </div>
     <div class="um">
-        <p><strong>Enter email address of default recipient</strong>
+        <p><strong>Enter email address of default recipient. Invalid email ids are automatically ommitted.</strong>
         <br/>Leave it blank if not required</p>
         <textarea name="sent_mail_id" id="sent_mail_id" placeholder="abc@def.xyz"  type="email" rows="1" cols="100"></textarea>
     </div>
     <div class="um">
-        <p><strong>Enter email address of default cc, seperated by ;</strong>
+        <p><strong>Enter email address of default cc, seperated by ;. Invalid email ids are automatically ommitted.</strong>
         <br/>Leave it blank if not required</p>
-        <textarea name="sent_mail_id" id="sent_mail_id" placeholder="abc@def.xyz;ghi@def.xyz;"  type="email" rows="4" cols="100"></textarea>
+        <textarea name="cc_to" id="cc_to" placeholder="abc@def.xyz;ghi@def.xyz;"  type="email" rows="4" cols="100"></textarea>
     </div>
     <div class="um">
         <button type="submit" name="submit" class="btn btn-primary">Create</button>
