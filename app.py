@@ -10,7 +10,21 @@ app.secret_key = 'CS50_final'
 
 @app.route("/")
 def index():
-    return render_template("index.html")
+    # Get templates
+    db = sqlite3.connect('emails.db')
+    cursor = db.cursor()
+    
+    cursor.execute("SELECT * FROM template")
+    rows = cursor.fetchall()
+    return render_template("/index.html", rows=rows)
+
+
+@app.route("/email", methods=["GET", "POST"])
+def email():
+   option = request.form.get('template_selection')
+   print("option")
+   print(option)
+   return redirect("/")
 
 
 @app.route("/template", methods=["GET","POST"])
@@ -80,6 +94,7 @@ def template():
               cursor.execute("INSERT INTO receiver(mail_id, type, template_id) VALUES (?,?,?)", [cc, 2, template_id])
 
         db.commit()
+        db.close()  
 
         return redirect("/")
     else:
