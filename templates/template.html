@@ -1,0 +1,34 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<form action="/template" method="post">
+    <div>
+        <p><strong>Enter variable names seperated by comma(,)</strong>
+        <br/>For example: person_name,company_name,date,age etc..</p>
+        <textarea name="variables" id="variables" placeholder="varaibles : person_name, company_name, date, age"  rows="4" cols="100"></textarea>
+    </div>
+    <div class="um">
+        <p><strong>Enter email body. Use single quotes to include a variable name.</strong>
+        <br/>Attention 'person_name'. Kindly send 'project_name' data asap</p>
+        <textarea name="mail_text" id="mail_text" placeholder="Email body: Attention 'person_name'. Kindly send 'project_name' data asap"  rows="4" cols="100"></textarea>
+    </div>
+    <div class="um">
+        <p><strong>Enter email signature. Use single quotes to include a variable name. </strong>
+        <br/>Leave it blank if not required</p>
+        <textarea name="mail_text" id="mail_text" placeholder="Regards, 'name'"  rows="4" cols="100"></textarea>
+    </div>
+    <div class="um">
+        <p><strong>Enter email address of default recipient</strong>
+        <br/>Leave it blank if not required</p>
+        <textarea name="sent_mail_id" id="sent_mail_id" placeholder="abc@def.xyz"  type="email" rows="1" cols="100"></textarea>
+    </div>
+    <div class="um">
+        <p><strong>Enter email address of default cc, seperated by ;</strong>
+        <br/>Leave it blank if not required</p>
+        <textarea name="sent_mail_id" id="sent_mail_id" placeholder="abc@def.xyz;ghi@def.xyz;"  type="email" rows="4" cols="100"></textarea>
+    </div>
+    <div class="um">
+        <button type="submit" name="submit" class="btn btn-primary">Create</button>
+    </div>
+</form> 
+{% endblock %}
