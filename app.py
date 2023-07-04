@@ -21,10 +21,62 @@ def index():
 
 @app.route("/email", methods=["GET", "POST"])
 def email():
-   option = request.form.get('template_selection')
-   print("option")
-   print(option)
-   return redirect("/")
+   if request.method == "POST":
+      option = request.form.get('template_id')
+      variables = []
+      receivers = []
+      if option:
+         # Get variables
+         db = sqlite3.connect('emails.db')
+         cursor = db.cursor()
+         cursor.execute("SELECT * FROM variables WHERE template_id = ?", [option])
+         variables = cursor.fetchall()  
+         cursor.execute("SELECT * FROM receiver WHERE template_id = ?", [option])
+         receivers = cursor.fetchall()
+         db.close()
+         print(variables)
+         print(receivers)
+         #Make dictionaries
+         variables = [{'name':name, 'value':''} for _,name,_ in variables]
+         receivers = [{'name': email_id, 'value': email_id, 'type':value} for _,email_id,value,_ in receivers]
+         print(variables)
+         print(receivers)
+      return render_template('email.html', template_id=option, variables=variables, receivers=receivers)
+   elif request.args.get('email_body'):
+      return redirect("/")
+   else :
+      print(request.args)
+      template_id = request.args.get('template_id')
+      print("get params")
+      print(template_id)
+      #Get varaibles
+      db = sqlite3.connect('emails.db')
+      cursor = db.cursor()
+      cursor.execute("SELECT * FROM variables WHERE template_id = ?", [template_id])
+      variables = cursor.fetchall()  
+      cursor.execute("SELECT * FROM receiver WHERE template_id = ?", [template_id])
+      receivers = cursor.fetchall()
+      cursor.execute("SELECT * FROM template WHERE id = ?", [template_id])
+      body = cursor.fetchall()
+      db.close()
+
+      # #Change tuples to arrays
+      variables = [{'name':name, 'value':request.args.get(name)} for _,name,_ in variables]
+      receivers = [{'name': email_id, 'value': request.args.get(email_id), 'type':value} for _,email_id,value,_ in receivers]
+      # variables = [[a,b,c] for a,b,c in variables]
+      # receivers = [[a,b,c,d] for a,b,c,d in receivers]
+
+      # #Update values with get variables
+      # # variable_dict, receiver_dict
+      # for variable in variables
+
+      # Set preview text
+      if body:
+         body = body[0][1]
+         for variable in variables:
+            body = body.replace("'"+variable['name']+"'", variable['value'])
+      
+      return render_template('email.html', template_id= template_id, variables=variables, receivers=receivers, preview= body)
 
 
 @app.route("/template", methods=["GET","POST"])

@@ -1,0 +1,61 @@
+{% extends "layout.html" %}
+
+{% block body %}
+    {% if not template_id %}
+        No template selected
+    {% else %}
+        <form action="/email">
+            {% if variables or receivers %}
+                <input type="text" name="template_id" value="{{template_id}}" hidden>
+                <table class="table table-primary table-striped">
+                    <thead>
+                        <th>Name</th>
+                        <th>Value</th>
+                    </thead>
+                    <tbody>
+                        {% for variable in variables %}
+                            <tr>
+                                <td>{{variable['name']}} : </td>
+                                <td>
+                                    <input type="text" name="{{variable['name']}}" value = "{{variable['value']}}">#
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        {% for receiver in receivers %}
+                        <tr>
+                            {% if receiver['type'] == 1 %}
+                                <td>Send to : </td>
+                            {% endif %}
+                            {% if receiver['type'] == 2 %}
+                                <td>CC to : </td>
+                            {% endif %}
+                            <td>
+                                <input type="email" name="{{receiver['name']}}" value="{{receiver['value']}}">*
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        {% if preview %}
+                            <tr>
+                                <td>Email body : </td>
+                                <td><textarea type="text" name="email_body" rows="4" cols="50" >{{preview}} </textarea>*</td>
+                            </tr>
+                        {% endif %}
+                    </tbody>
+                </table>
+                    <p># Enter a value if only required. Empty cells are automatically discarded</p>
+                    <p>* Edit only if required. Invalid email ids are automatically rejected</p>
+            {% endif %}
+            <div>
+                <button type="submit" class="btn btn-primary">
+                    {% if preview %}
+                        Create mail
+                    {% else %}
+                        Preview
+                    {% endif %}
+                </button>
+            </div>
+        </form>
+    {% endif %}
+
+    
+{% endblock %}
