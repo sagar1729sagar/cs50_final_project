@@ -73,12 +73,17 @@ def email():
       # for variable in variables
 
       # Set preview text
+      print('body')
+      print(body)
       if body:
+         subject = body[0][2]
          body = body[0][1]
          for variable in variables:
             body = body.replace("'"+variable['name']+"'", variable['value'])
+            if subject:
+               subject = subject.replace("'"+variable['name']+"'", variable['value'])
       
-      return render_template('email.html', template_id= template_id, variables=variables, receivers=receivers, preview= body)
+      return render_template('email.html', template_id= template_id, variables=variables, receivers=receivers, preview= [body, subject])
 
 
 @app.route("/template", methods=["GET","POST"])
@@ -91,6 +96,10 @@ def template():
            variables = variables.split(',')
            variables = [v.strip() for v in variables if v]
         print(variables)
+
+        subject = request.form.get('mail_subject')
+        print('subject')
+        print(subject)
 
         body = request.form.get('mail_body')
         print(body)
@@ -118,7 +127,7 @@ def template():
         cursor = db.cursor()
 
         # Add template
-        cursor.execute("INSERT INTO template (body) VALUES (?)", [body])
+        cursor.execute("INSERT INTO template (body, subject) VALUES (?,?)", [body, subject])
         db.commit()
         template_id = cursor.lastrowid
         print("Template id "+str(cursor.lastrowid))

@@ -14,15 +14,24 @@
                     </thead>
                     <tbody>
                         {% for variable in variables %}
-                            <tr>
+                            <tr 
+                                {% if preview %}
+                                hidden
+                                {% endif %}
+                            >
                                 <td>{{variable['name']}} : </td>
                                 <td>
-                                    <input type="text" name="{{variable['name']}}" value = "{{variable['value']}}">#
+                                    <input type="text" name="{{variable['name']}}" value = "{{variable['value']}}"
+                                    >#
                                 </td>
                             </tr>
                         {% endfor %}
                         {% for receiver in receivers %}
-                        <tr>
+                        <tr 
+                            {% if preview %}
+                            hidden
+                            {% endif %}
+                        >
                             {% if receiver['type'] == 1 %}
                                 <td>Send to : </td>
                             {% endif %}
@@ -36,8 +45,12 @@
                         {% endfor %}
                         {% if preview %}
                             <tr>
+                                <td>Subject : </td>
+                                <td><textarea type="text" name="email_subject" rows="4" cols="50" >{{preview[1]}} </textarea>*</td>
+                            </tr>
+                            <tr>
                                 <td>Email body : </td>
-                                <td><textarea type="text" name="email_body" rows="4" cols="50" >{{preview}} </textarea>*</td>
+                                <td><textarea type="text" name="email_body" rows="4" cols="50" >{{preview[0]}} </textarea>*</td>
                             </tr>
                         {% endif %}
                     </tbody>
