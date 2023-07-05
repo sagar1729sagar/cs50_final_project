@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, flash, redirect
 import sqlite3
-from helpers import check_email
+from helpers import check_email,create_email
 
 app = Flask(__name__)
 app.secret_key = 'CS50_final'
@@ -43,6 +43,8 @@ def email():
          print(receivers)
       return render_template('email.html', template_id=option, variables=variables, receivers=receivers)
    elif request.args.get('email_body'):
+      print("Creatin started")
+      create_email(request.args)
       return redirect("/")
    else :
       print(request.args)
