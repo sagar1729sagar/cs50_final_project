@@ -43,6 +43,10 @@
                             </td>
                         </tr>
                         {% endfor %}
+                        {% if signature %}
+                            <td>Signature</td>
+                            <td><textarea type="text" name="signature" rows="4" cols="50">{{signature}}</textarea>*</td>
+                        {% endif %}
                         {% if preview %}
                             <tr>
                                 <td>Subject : </td>

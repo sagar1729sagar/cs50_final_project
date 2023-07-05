@@ -33,15 +33,19 @@ def email():
          variables = cursor.fetchall()  
          cursor.execute("SELECT * FROM receiver WHERE template_id = ?", [option])
          receivers = cursor.fetchall()
+         cursor.execute("SELECT * FROM signature WHERE template_id = ?", [option])
+         signature = cursor.fetchall()
          db.close()
          print(variables)
          print(receivers)
          #Make dictionaries
          variables = [{'name':name, 'value':''} for _,name,_ in variables]
          receivers = [{'name': email_id, 'value': email_id, 'type':value} for _,email_id,value,_ in receivers]
+         signature = signature[0][1] if signature else ''
          print(variables)
          print(receivers)
-      return render_template('email.html', template_id=option, variables=variables, receivers=receivers)
+         print(signature)
+      return render_template('email.html', template_id=option, variables=variables, receivers=receivers, signature=signature)
    elif request.args.get('email_body'):
       print("Creatin started")
       create_email(request.args)
@@ -65,6 +69,7 @@ def email():
       # #Change tuples to arrays
       variables = [{'name':name, 'value':request.args.get(name)} for _,name,_ in variables]
       receivers = [{'name': email_id, 'value': request.args.get(email_id), 'type':value} for _,email_id,value,_ in receivers]
+      signature = request.args.get('signature')
       # variables = [[a,b,c] for a,b,c in variables]
       # receivers = [[a,b,c,d] for a,b,c,d in receivers]
 
@@ -82,6 +87,10 @@ def email():
             body = body.replace("'"+variable['name']+"'", variable['value'])
             if subject:
                subject = subject.replace("'"+variable['name']+"'", variable['value'])
+            if signature:
+               signature = signature.replace("'"+variable['name']+"'", variable['value'])
+      if signature:
+         body = body + '\n\n\n' + signature
       
       return render_template('email.html', template_id= template_id, variables=variables, receivers=receivers, preview= [body, subject])
 
