@@ -19,6 +19,11 @@ def index():
     return render_template("/index.html", rows=rows)
 
 
+@app.route("/happy")
+def happy():
+   return render_template('happy.html')
+
+
 @app.route("/email", methods=["GET", "POST"])
 def email():
    if request.method == "POST":
@@ -49,7 +54,7 @@ def email():
    elif request.args.get('email_body'):
       print("Creatin started")
       create_email(request.args)
-      return redirect("/")
+      return redirect("/happy")
    else :
       print(request.args)
       template_id = request.args.get('template_id')
