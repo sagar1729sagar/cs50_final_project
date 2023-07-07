@@ -4,7 +4,7 @@
     {% if not template_id %}
         No template selected
     {% else %}
-        <div class="container container-fluid">
+        <div class="container container-fluid d-flex justify-content-center">
                 <form action="/email">
                 {% if variables or receivers %}
                     <input type="text" name="template_id" value="{{template_id}}" hidden>
