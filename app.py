@@ -28,8 +28,11 @@ def happy():
 def email():
    if request.method == "POST":
       option = request.form.get('template_id')
+      print("option")
+      print(option)
       variables = []
       receivers = []
+      signature = ''
       if option:
          # Get variables
          db = sqlite3.connect('emails.db')
