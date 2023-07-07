@@ -21,7 +21,7 @@
                         <button class="btn btn-warning" id="change_{{row[0]}}" onclick="clicked({{row[0]}})">Edit</button>
                     </td>
                     <td>
-                        <button class="btn btn-danger" id="remove_{{row[0]}}">Delete</button>
+                        <button class="btn btn-danger" id="remove_{{row[0]}}" onclick="del({{row[0]}})">Delete</button>
                     </td>
                 </tr>
                 {% endfor %}
