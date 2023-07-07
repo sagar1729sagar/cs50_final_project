@@ -8,9 +8,9 @@ includes = [ 'jinja2' , 'jinja2.ext']
 excludes = ['Tkinter']
 
 setup(
- name='Sample Flask App',
+ name='Email templates',
  version = '0.1',
- description = 'Sample Flask App',
+ description = 'Craete and save your email templates and send meails insantly with outlook',
  options = {'build_exe':   {'excludes':excludes,'include_files':includefiles, 'includes':includes}},
  executables = [Executable('app.py')]
 )

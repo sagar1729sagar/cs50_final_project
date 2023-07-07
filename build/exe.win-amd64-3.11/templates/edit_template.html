@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<form action="/save/{{id}}" method="post">
+    <div>
+        <p><strong>Enter variable names seperated by comma(,)</strong>
+        <br/>For example: person_name,company_name,date,age etc..</p>
+        <textarea name="variables" id="variables" placeholder="varaibles : person_name, company_name, date, age"  rows="4" cols="100">{{variables}}</textarea>
+    </div>
+    <div class="um">
+        <p><strong>Enter email subject. Use single quotes to include a variable name.</strong>
+        <br/>For example : Reg delivery of 'item' by 'company'</p>
+        <textarea name="mail_subject" id="mail_subject" placeholder="Reg delivery of 'item' by 'company'"  rows="4" cols="100">{{subject}}</textarea>
+    </div>
+    <div class="um">
+        <p><strong>Enter email body. Use single quotes to include a variable name.</strong>
+        <br/>For example : Attention 'person_name'. Kindly send 'project_name' data asap</p>
+        <textarea name="mail_body" id="mail_body" placeholder="Email body: Attention 'person_name'. Kindly send 'project_name' data asap"  rows="4" cols="100">{{body}}</textarea>
+    </div>
+    <div class="um">
+        <p><strong>Enter email signature. Use single quotes to include a variable name. </strong>
+        <br/>Leave it blank if not required</p>
+        <textarea name="signature" id="signature" placeholder="Regards, 'name'"  rows="4" cols="100">{{signature}}</textarea>
+    </div>
+    <div class="um">
+        <p><strong>Enter email address of default recipient. Invalid email ids are automatically ommitted.</strong>
+        <br/>Leave it blank if not required</p>
+        <textarea name="sent_mail_id" id="sent_mail_id" placeholder="abc@def.xyz"  type="email" rows="1" cols="100">{{sends}}</textarea>
+    </div>
+    <div class="um">
+        <p><strong>Enter email address of default cc, seperated by ;. Invalid email ids are automatically ommitted.</strong>
+        <br/>Leave it blank if not required</p>
+        <textarea name="cc_to" id="cc_to" placeholder="abc@def.xyz;ghi@def.xyz;"  type="email" rows="4" cols="100">{{ccs}}</textarea>
+    </div>
+    <div class="um">
+        <button type="submit" name="submit" class="btn btn-dark">Save</button>
+    </div>
+</form> 
+{% endblock %}
