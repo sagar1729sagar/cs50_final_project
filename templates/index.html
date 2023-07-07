@@ -14,7 +14,6 @@
                     <thead>
                         <th>Select</th>
                         <th>Templates</th>
-                        <th>Remove</th>
                     </thead>
                     <tbody>
                         {% for row in rows %}
@@ -24,9 +23,6 @@
                                 </td>
                                 <td class="text-start">
                                     {{row[1]}}
-                                </td>
-                                <td>
-                                    <button class="btn btn-danger" id="btn_{{row[0]}}">Delete</button>
                                 </td>
                             </tr>
                         {% endfor %}

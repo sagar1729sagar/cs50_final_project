@@ -24,6 +24,17 @@ def happy():
    return render_template('happy.html')
 
 
+@app.route("/edit")
+def edit():
+   # Get templates
+    db = sqlite3.connect('emails.db')
+    cursor = db.cursor()
+    
+    cursor.execute("SELECT * FROM template")
+    rows = cursor.fetchall()
+    return render_template("/edit.html", rows=rows)
+
+
 @app.route("/email", methods=["GET", "POST"])
 def email():
    if request.method == "POST":
