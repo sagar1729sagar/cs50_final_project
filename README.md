@@ -1,7 +1,7 @@
 # cs50_final_project
 # My email templates
 
-Url - *
+Url - https://youtu.be/wVnYTZkGBYM
 
 This app  allows its users to create an email template and then use it to generate a drafted outlook email.This is helpful for people who are to send same email multiple times periodically with small change in details. Instead of typing the same email every time, they can just use a template they created, change a few details and send the email.
 
